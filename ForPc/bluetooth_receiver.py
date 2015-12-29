@@ -10,7 +10,10 @@ mouse_x = pyautogui.position()[0]
 mouse_y = pyautogui.position()[1]
 screen_width = pyautogui.size()[0]
 screen_height = pyautogui.size()[1]
+
+'''this enable that mouse cursor can move without delay'''
 pyautogui.PAUSE = 0
+
 #########################################################
 #                socket  -  server                      #
 #########################################################
@@ -68,7 +71,9 @@ try:
             delta_y = data[1].split(":")[1]*(screen_width/150)
             mouse_x = min( 0, max( mouse_x + delta_x ) )
             mouse_y = min( 0, max( mouse_y + delta_y ) )
-            pyautogui.moveTo(mouse_x,mouse_y)
+
+            # it's important to explicit parameter when pyautogui.PASUE = 0
+            pyautogui.moveTo( x=mouse_x, y=mouse_y )
             if data[2].split(":")[1] !=0 :
                 pyautogui.mouseDown(button='left')
             if data[3].split(":")[1] !=0 :
